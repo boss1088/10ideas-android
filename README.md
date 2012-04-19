@@ -1,4 +1,4 @@
 10ideas-android
 ===============
 
-MasterOfCode team building project. Android Backend.
+MasterOfCode team building project. Android Frontend.
