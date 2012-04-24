@@ -43,6 +43,7 @@ public class DashboardFragment extends BaseFragment {
                 case R.id.sign_out:
                     parentActivity.finish();
                     break;
+
             }
         }
     };
