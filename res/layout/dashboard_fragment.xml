@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#FFF">
+
+    <TextView
+            android:id="@+id/created_ideas"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="20dip"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="#000"
+            android:text="You created 5 of 10 ideas for today"/>
+
+    <Button
+            android:id="@+id/sign_out"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dip"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:text="@string/sign_out"/>
+
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/created_ideas"
+            android:layout_above="@id/sign_out"
+            android:layout_margin="10dip"
+            android:gravity="center_vertical"
+            android:stretchColumns="0,1">
+
+        <TableRow>
+            <Button
+                    style="@style/DashboardButton"
+                    android:text="Ideas for today"/>
+            <Button
+                    style="@style/DashboardButton"
+                    android:text="All public ideas"/>
+        </TableRow>
+
+        <TableRow>
+            <Button
+                    style="@style/DashboardButton"
+                    android:text="TOP 10 ideas"/>
+            <Button
+                    style="@style/DashboardButton"
+                    android:text="Add idea"/>
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+package com.masterofcode.android._10ideas.screens.activities;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.Window;
+import com.masterofcode.android.R;
+import com.masterofcode.android._10ideas.BaseActivity;
+import com.masterofcode.android._10ideas.screens.fragments.DashboardFragment;
+import com.masterofcode.android._10ideas.screens.fragments.SignInFragment;
+
+public class DashboardActivity extends BaseActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        setTitle(R.string._10_ideas);
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.dashboard_activity);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new DashboardFragment()).commit();
+        }
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, fragment);
+        ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
+    }
+}

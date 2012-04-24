@@ -1,10 +1,20 @@
 package com.masterofcode.android._10ideas.screens.fragments;
 
+<<<<<<< Updated upstream
+=======
 import android.content.Intent;
+>>>>>>> Stashed changes
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< Updated upstream
+import com.masterofcode.android.R;
+import com.masterofcode.android._10ideas.BaseFragment;
+
+public class SignInFragment extends BaseFragment {
+
+=======
 import android.widget.Button;
 import android.widget.TextView;
 import com.masterofcode.android.R;
@@ -16,10 +26,13 @@ public class SignInFragment extends BaseFragment {
 
     AuthenticationActivity parentActivity;
 
+>>>>>>> Stashed changes
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.sign_in_fragment, container, false);
     }
+<<<<<<< Updated upstream
+=======
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -57,4 +70,5 @@ public class SignInFragment extends BaseFragment {
             }
         }
     };
+>>>>>>> Stashed changes
 }

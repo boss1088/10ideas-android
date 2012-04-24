@@ -8,7 +8,11 @@
         android:background="#FFF">
 
     <LinearLayout
+<<<<<<< Updated upstream
+            android:id="@+id/sign_up"
+=======
             android:id="@+id/sign_up_container"
+>>>>>>> Stashed changes
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -24,7 +28,11 @@
                 android:textColor="#000"/>
 
         <Button
+<<<<<<< Updated upstream
+                android:id="@+id/login"
+=======
                 android:id="@+id/sign_up"
+>>>>>>> Stashed changes
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dip"
@@ -37,7 +45,11 @@
     <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+<<<<<<< Updated upstream
+            android:layout_above="@id/sign_up"
+=======
             android:layout_above="@id/sign_up_container"
+>>>>>>> Stashed changes
             android:gravity="center_vertical"
             android:orientation="vertical">
         <TextView

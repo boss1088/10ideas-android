@@ -1,6 +1,5 @@
 package com.masterofcode.android._10ideas.screens.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +9,14 @@ import android.widget.TextView;
 import com.masterofcode.android.R;
 import com.masterofcode.android._10ideas.BaseFragment;
 import com.masterofcode.android._10ideas.screens.activities.AuthenticationActivity;
-import com.masterofcode.android._10ideas.screens.activities.DashboardActivity;
 
-public class SignInFragment extends BaseFragment {
+public class SignUpFragment extends BaseFragment {
 
     AuthenticationActivity parentActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.sign_in_fragment, container, false);
+        return inflater.inflate(R.layout.sign_up_fragment, container, false);
     }
 
     @Override
@@ -49,10 +47,10 @@ public class SignInFragment extends BaseFragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.login:
-                    startActivity(new Intent(getActivity(), DashboardActivity.class));
+                    parentActivity.replaceFragment(new SignInFragment());
                     break;
                 case R.id.sign_up:
-                    parentActivity.replaceFragment(new SignUpFragment());
+                    // TODO Sign Up button click action
                     break;
             }
         }

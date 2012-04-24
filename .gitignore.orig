@@ -19,5 +19,9 @@ local.properties
 .idea/scopes
 .idea/dictionaries/
 .idea/inspectionProfiles/
+<<<<<<< Updated upstream
+.idea/libraries
+=======
 .idea/libraries
 .idea/misc.xml
+>>>>>>> Stashed changes
