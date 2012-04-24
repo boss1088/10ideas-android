@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">10ideas-android</string>
+    <string name="_10_ideas">10 IDEAS</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="not_have_account">do not have an account?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
