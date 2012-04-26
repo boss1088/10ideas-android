@@ -12,7 +12,7 @@ import com.masterofcode.android._10ideas.screens.activities.AuthenticationActivi
 
 public class SignUpFragment extends BaseFragment {
 
-    AuthenticationActivity parentActivity;
+    AuthenticationActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,17 +22,17 @@ public class SignUpFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        parentActivity = (AuthenticationActivity) getActivity();
+        activity = (AuthenticationActivity) getActivity();
 
         updateUi();
     }
 
     private void updateUi() {
-        parentActivity.runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 TextView text1 = (TextView) getView().findViewById(R.id.text1);
-                text1.setText(parentActivity.getString(R.string._10_ideas).toUpperCase());
+                text1.setText(activity.getString(R.string._10_ideas).toUpperCase());
 
                 Button login = (Button) getView().findViewById(R.id.login);
                 Button signUp = (Button) getView().findViewById(R.id.sign_up);
@@ -47,7 +47,7 @@ public class SignUpFragment extends BaseFragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.login:
-                    parentActivity.replaceFragment(new SignInFragment());
+                    activity.replaceFragment(new SignInFragment());
                     break;
                 case R.id.sign_up:
                     // TODO Sign Up button click action

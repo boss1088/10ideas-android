@@ -9,4 +9,8 @@
     <string name="sign_up">Sign Up</string>
     <string name="have_account">do you have an account?</string>
     <string name="sign_out">Sign Out</string>
+    <string name="dashbrd_my_ideas">My ideas</string>
+    <string name="dashbrd_public_ideas">Public ideas</string>
+    <string name="dashbrd_top_10">TOP 10 ideas</string>
+    <string name="dashbrd_add_idea">Add idea</string>
 </resources>

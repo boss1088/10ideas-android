@@ -41,19 +41,19 @@
         <TableRow>
             <Button
                     style="@style/DashboardButton"
-                    android:text="Ideas for today"/>
+                    android:text="@string/dashbrd_my_ideas"/>
             <Button
                     style="@style/DashboardButton"
-                    android:text="All public ideas"/>
+                    android:text="@string/dashbrd_public_ideas"/>
         </TableRow>
 
         <TableRow>
             <Button
                     style="@style/DashboardButton"
-                    android:text="TOP 10 ideas"/>
+                    android:text="@string/dashbrd_top_10"/>
             <Button
                     style="@style/DashboardButton"
-                    android:text="Add idea"/>
+                    android:text="@string/dashbrd_add_idea"/>
         </TableRow>
 
     </TableLayout>

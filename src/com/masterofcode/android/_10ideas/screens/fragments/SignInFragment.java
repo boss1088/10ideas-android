@@ -14,7 +14,7 @@ import com.masterofcode.android._10ideas.screens.activities.DashboardActivity;
 
 public class SignInFragment extends BaseFragment {
 
-    AuthenticationActivity parentActivity;
+    AuthenticationActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,17 +24,17 @@ public class SignInFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        parentActivity = (AuthenticationActivity) getActivity();
+        activity = (AuthenticationActivity) getActivity();
 
         updateUi();
     }
 
     private void updateUi() {
-        parentActivity.runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 TextView text1 = (TextView) getView().findViewById(R.id.text1);
-                text1.setText(parentActivity.getString(R.string._10_ideas).toUpperCase());
+                text1.setText(activity.getString(R.string._10_ideas).toUpperCase());
 
                 Button login = (Button) getView().findViewById(R.id.login);
                 Button signUp = (Button) getView().findViewById(R.id.sign_up);
@@ -52,7 +52,7 @@ public class SignInFragment extends BaseFragment {
                     startActivity(new Intent(getActivity(), DashboardActivity.class));
                     break;
                 case R.id.sign_up:
-                    parentActivity.replaceFragment(new SignUpFragment());
+                    activity.replaceFragment(new SignUpFragment());
                     break;
             }
         }

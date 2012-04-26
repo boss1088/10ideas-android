@@ -11,7 +11,7 @@ import com.masterofcode.android._10ideas.screens.activities.DashboardActivity;
 
 public class DashboardFragment extends BaseFragment {
 
-    DashboardActivity parentActivity;
+    DashboardActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,13 +21,13 @@ public class DashboardFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        parentActivity = (DashboardActivity) getActivity();
+        activity = (DashboardActivity) getActivity();
 
         updateUi();
     }
 
     private void updateUi() {
-        parentActivity.runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Button signOut = (Button) getView().findViewById(R.id.sign_out);
@@ -41,9 +41,8 @@ public class DashboardFragment extends BaseFragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.sign_out:
-                    parentActivity.finish();
+                    activity.finish();
                     break;
-
             }
         }
     };
