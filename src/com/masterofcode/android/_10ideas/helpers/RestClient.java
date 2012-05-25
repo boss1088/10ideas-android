@@ -34,6 +34,7 @@ public class RestClient {
 
     final static public String BASE_URL = "http://stage.masterofcode.com:10101/";
     final static public String BASE_USERS = "users.json";
+    final static public String BASE_USERS_SIGN_IN = "users/sign_in.json";
     final static public String BASE_IDEAS = "ideas.json";
     final static public String BASE_PUBLIC_IDEAS = "public/ideas.json";
 
