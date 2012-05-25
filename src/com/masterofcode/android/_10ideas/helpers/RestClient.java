@@ -170,7 +170,7 @@ public class RestClient {
                 ex.printStackTrace();
             }
 
-        return null;
+        return json;
     }
 
     public static JSONArray get(String url)
