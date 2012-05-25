@@ -5,7 +5,9 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8"
               android:targetSdkVersion="10"/>
-    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
+    <application android:name="com.masterofcode.android._10ideas.IdeasApp"
+                 android:label="@string/app_name"
+                 android:icon="@drawable/ic_launcher">
         <activity android:name="._10ideas.screens.activities.AuthenticationActivity"
                   android:label="@string/app_name">
             <intent-filter>
