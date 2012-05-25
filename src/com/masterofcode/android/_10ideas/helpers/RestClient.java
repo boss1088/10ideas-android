@@ -115,7 +115,7 @@ public class RestClient {
         return json;
     }
 
-    public static String sendPut(String url, String id, String author){
+    public static String sendPut(String url){
 
         String result = null;
         try{
@@ -124,9 +124,6 @@ public class RestClient {
 
             // Prepare a request object
             HttpPut httpput = new HttpPut(url);
-            MultipartEntity reqEntity = new MultipartEntity();
-            reqEntity.addPart("author", new StringBody(author));
-            httpput.setEntity(reqEntity);
             // Execute the request
             HttpResponse response;
             try {
