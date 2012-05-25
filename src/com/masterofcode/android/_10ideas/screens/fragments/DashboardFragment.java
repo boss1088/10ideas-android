@@ -14,6 +14,12 @@ public class DashboardFragment extends BaseFragment {
     DashboardActivity activity;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activity = (DashboardActivity) getActivity();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.dashboard_fragment, container, false);
     }
@@ -21,7 +27,6 @@ public class DashboardFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        activity = (DashboardActivity) getActivity();
 
         updateTitle(getView(), R.string.home);
         updateUi();

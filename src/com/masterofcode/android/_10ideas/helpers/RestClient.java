@@ -151,7 +151,7 @@ public class RestClient {
         String result;
         JSONObject json = null;
 
-        if(!TextUtils.isEmpty(url))
+        /*if(!TextUtils.isEmpty(url))*/
             try {
                 HttpClient client = new DefaultHttpClient();
                 client.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);

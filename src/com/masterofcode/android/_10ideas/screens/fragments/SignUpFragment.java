@@ -1,14 +1,22 @@
 package com.masterofcode.android._10ideas.screens.fragments;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.masterofcode.android.R;
 import com.masterofcode.android._10ideas.BaseFragment;
+import com.masterofcode.android._10ideas.helpers.IdeasApi;
+import com.masterofcode.android._10ideas.helpers.PreferenceHelper;
 import com.masterofcode.android._10ideas.screens.activities.AuthenticationActivity;
+import com.masterofcode.android._10ideas.screens.activities.DashboardActivity;
+
+import java.io.UnsupportedEncodingException;
 
 public class SignUpFragment extends BaseFragment {
 
@@ -50,9 +58,50 @@ public class SignUpFragment extends BaseFragment {
                     activity.onBackPressed();
                     break;
                 case R.id.sign_up:
-                    // TODO Sign Up button click action
+                    signUp();
                     break;
             }
         }
     };
+
+    private void signUp() {
+        EditText username = (EditText) getView().findViewById(R.id.username);
+        EditText password = (EditText) getView().findViewById(R.id.password);
+
+        final String usernameStr = username.getText().toString().trim();
+        final String passwordStr = password.getText().toString().trim();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (!usernameStr.equals("") && !passwordStr.equals("")) {
+                    try {
+                        IdeasApi.register(usernameStr, passwordStr);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (PreferenceHelper.isAuthenticated()) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getActivity().finish();
+                            getActivity().startActivity(new Intent(getActivity(), DashboardActivity.class));
+                        }
+                    });
+                } else {
+                    showErrorDialog();
+                }
+            }
+        }).start();
+    }
+
+    private void showErrorDialog() {
+        new AlertDialog.Builder(getActivity())
+                .setCancelable(false)
+                .setTitle("Register failed")
+                .setMessage("Something went wrong %)")
+                .setPositiveButton("Ok", null).show();
+    }
 }
