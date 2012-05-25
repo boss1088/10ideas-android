@@ -47,7 +47,7 @@ public class SignUpFragment extends BaseFragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.login:
-                    activity.replaceFragment(new SignInFragment());
+                    activity.onBackPressed();
                     break;
                 case R.id.sign_up:
                     // TODO Sign Up button click action

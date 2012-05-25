@@ -1,8 +1,31 @@
 <resources>
-    <style name="DashboardButton">
+    <style name="DashboardButton" parent="DefaultButton">
         <item name="android:layout_width">100dip</item>
         <item name="android:layout_height">100dip</item>
         <item name="android:layout_margin">10dip</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="TitleBar">
+        <item name="android:layout_height">@dimen/action_bar_default_height</item>
+        <item name="android:background">@color/titlebar_bg</item>
+    </style>
+    <style name="DefaultButton">
+        <item name="android:background">@drawable/btn_default_holo_light</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/primary_text_holo_light</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:minWidth">64dip</item>
+    </style>
+    <style name="DefaultEditText">
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/edit_text_holo_light</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMediumInverse</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 </resources>
