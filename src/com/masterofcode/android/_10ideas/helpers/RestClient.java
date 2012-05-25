@@ -14,6 +14,7 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,7 +33,9 @@ import java.io.InputStreamReader;
 public class RestClient {
 
     final static public String BASE_URL = "http://stage.masterofcode.com:10101/";
-    final static public String BASE_REGISTER = "users.json";
+    final static public String BASE_USERS = "users.json";
+    final static public String BASE_IDEAS = "ideas.json";
+    final static public String BASE_PUBLIC_IDEAS = "public/ideas.json";
 
     private static String convertStreamToString(InputStream is) {
         /*
@@ -143,7 +146,7 @@ public class RestClient {
         return result;
     }
 
-    public static JSONObject register(String url, String[] params){
+    public static JSONObject post(String url, final MultipartEntity reqEntity){
         String result;
         JSONObject json = null;
 
@@ -152,11 +155,6 @@ public class RestClient {
                 HttpClient client = new DefaultHttpClient();
                 client.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
                 HttpPost post = new HttpPost(url);
-
-                MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-
-                reqEntity.addPart("user[email]", new StringBody(params[0]));
-                reqEntity.addPart("user[password]", new StringBody(params[1]));
 
                 post.setEntity(reqEntity);
                 HttpResponse response = client.execute(post);
@@ -172,6 +170,56 @@ public class RestClient {
             }
 
         return null;
+    }
+
+    public static JSONArray get(String url)
+    {
+        String result;
+        JSONArray json = null;
+
+        HttpClient httpclient = new DefaultHttpClient();
+
+        // Prepare a request object
+        HttpGet httpget = new HttpGet(url);
+
+        // Execute the request
+        HttpResponse response;
+        try {
+            response = httpclient.execute(httpget);
+            // Examine the response status
+
+            // Get hold of the response entity
+            HttpEntity entity = response.getEntity();
+            // If the response does not enclose an entity, there is no need
+            // to worry about connection release
+
+            if (entity != null) {
+
+                // A Simple JSON Response Read
+                InputStream instream = entity.getContent();
+                result= convertStreamToString(instream);
+
+                // A Simple JSONObject Creation
+                if (result.equals("null\n") || TextUtils.isEmpty(result)){
+                    json = null;
+                } else {
+                    json=new JSONArray(result);
+                }
+
+
+                // Closing the input stream will trigger connection release
+                instream.close();
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 
 }

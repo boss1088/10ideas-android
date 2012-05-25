@@ -20,6 +20,7 @@ public class PreferenceHelper {
     public static final String AUTH_TOKEN = "auth_token";
     public static final String USER_PASSWORD = "user_password";
     public static final String USER_EMAIL = "user_email";
+    public static final String USER_ID = "user_id";
 
     static Context mContext = null;
     static SharedPreferences prefs = null;
@@ -116,6 +117,14 @@ public class PreferenceHelper {
 
     public static String getUserEmail() {
         return prefs.getString(USER_EMAIL, "false");
+    }
+
+    public static void setUserId(String userId) {
+        updatePref(USER_ID, userId);
+    }
+
+    public static String getUserId() {
+        return prefs.getString(USER_ID, "false");
     }
 
     public static void clearAuthentication() {
