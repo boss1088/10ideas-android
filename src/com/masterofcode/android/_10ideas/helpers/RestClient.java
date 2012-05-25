@@ -36,7 +36,7 @@ public class RestClient {
     final static public String BASE_USERS = "users.json";
     final static public String BASE_USERS_SIGN_IN = "users/sign_in.json";
     final static public String BASE_IDEAS = "ideas.json";
-    final static public String BASE_PUBLIC_IDEAS = "public/ideas.json";
+    final static public String BASE_PUBLIC_IDEAS = "ideas/public.json";
 
     private static String convertStreamToString(InputStream is) {
         /*

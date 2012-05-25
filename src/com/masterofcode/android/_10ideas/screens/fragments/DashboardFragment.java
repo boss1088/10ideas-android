@@ -23,6 +23,7 @@ public class DashboardFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         activity = (DashboardActivity) getActivity();
 
+        updateTitle(getView(), R.string.home);
         updateUi();
     }
 
@@ -32,6 +33,12 @@ public class DashboardFragment extends BaseFragment {
             public void run() {
                 Button signOut = (Button) getView().findViewById(R.id.sign_out);
                 signOut.setOnClickListener(btnClickListener);
+
+                Button myIdeas = (Button) getView().findViewById(R.id.my_ideas);
+                myIdeas.setOnClickListener(btnClickListener);
+
+                Button addIdea = (Button) getView().findViewById(R.id.add_idea);
+                addIdea.setOnClickListener(btnClickListener);
             }
         });
     }
@@ -42,6 +49,12 @@ public class DashboardFragment extends BaseFragment {
             switch (view.getId()) {
                 case R.id.sign_out:
                     activity.finish();
+                    break;
+                case R.id.my_ideas:
+                    activity.replaceFragment(new MyIdeasFragment());
+                    break;
+                case R.id.add_idea:
+                    activity.replaceFragment(new EditIdeaFragment());
                     break;
             }
         }

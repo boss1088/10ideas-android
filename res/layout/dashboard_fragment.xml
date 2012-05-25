@@ -4,58 +4,118 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#FFF">
+        android:background="@color/default_bg">
 
-    <TextView
-            android:id="@+id/created_ideas"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="20dip"
-            android:layout_marginLeft="20dip"
-            android:layout_marginRight="20dip"
-            android:textAppearance="@android:style/TextAppearance.Medium"
-            android:textColor="#000"
-            android:text="You created 5 of 10 ideas for today"/>
+    <include
+            android:id="@+id/titlebar"
+            layout="@layout/titlebar"/>
 
-    <Button
-            android:id="@+id/sign_out"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dip"
-            android:layout_marginLeft="20dip"
-            android:layout_marginRight="20dip"
-            android:text="@string/sign_out"/>
-
-    <TableLayout
+    <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@id/created_ideas"
-            android:layout_above="@id/sign_out"
-            android:layout_margin="10dip"
-            android:gravity="center_vertical"
-            android:stretchColumns="0,1">
+            android:layout_below="@id/titlebar">
 
-        <TableRow>
-            <Button
-                    style="@style/DashboardButton"
-                    android:text="@string/dashbrd_my_ideas"/>
-            <Button
-                    style="@style/DashboardButton"
-                    android:text="@string/dashbrd_public_ideas"/>
-        </TableRow>
+        <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-        <TableRow>
-            <Button
-                    style="@style/DashboardButton"
-                    android:text="@string/dashbrd_top_10"/>
-            <Button
-                    style="@style/DashboardButton"
-                    android:text="@string/dashbrd_add_idea"/>
-        </TableRow>
+            <RelativeLayout
+                    android:id="@+id/created_ideas"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/info_bg"
+                    android:padding="10dp">
 
-    </TableLayout>
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true">
+
+                    <TextView
+                            android:id="@+id/day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="32sp"
+                            android:text="4/10"/>
+
+                    <TextView
+                            android:id="@+id/month_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="6dp"
+                            android:textAppearance="@android:style/TextAppearance.Small"
+                            android:textColor="@color/text_color"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/created_ideas"/>
+
+                </LinearLayout>
+
+                <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/desc_username"
+                        android:textColor="@color/text_color"
+                        android:text="Username"/>
+
+            </RelativeLayout>
+
+            <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/created_ideas"
+                    android:background="@color/title_separator"/>
+
+            <TableLayout
+                    android:id="@+id/table"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@id/created_ideas"
+                    android:layout_margin="10dip"
+                    android:gravity="center_vertical"
+                    android:stretchColumns="0,1">
+
+                <TableRow>
+                    <Button
+                            android:id="@+id/my_ideas"
+                            style="@style/DashboardButton"
+                            android:text="@string/dashbrd_my_ideas"/>
+                    <Button
+                            style="@style/DashboardButton"
+                            android:text="@string/dashbrd_public_ideas"/>
+                </TableRow>
+
+                <TableRow>
+                    <Button
+                            style="@style/DashboardButton"
+                            android:text="@string/dashbrd_top_10"/>
+                    <Button
+                            android:id="@+id/add_idea"
+                            style="@style/DashboardButton"
+                            android:text="@string/dashbrd_add_idea"/>
+                </TableRow>
+
+            </TableLayout>
+
+            <Button
+                    android:id="@+id/sign_out"
+                    style="@style/DefaultButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/table"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="20dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:text="@string/sign_out"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

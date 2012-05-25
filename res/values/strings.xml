@@ -13,4 +13,18 @@
     <string name="dashbrd_public_ideas">Public ideas</string>
     <string name="dashbrd_top_10">TOP 10 ideas</string>
     <string name="dashbrd_add_idea">Add idea</string>
+    <string name="desc_refresh">refresh</string>
+    <string name="home">Home</string>
+    <string name="my_ideas">My Ideas</string>
+    <string name="add_idea">Add Idea</string>
+    <string name="view_idea">View Idea</string>
+    <string name="edit_idea">Edit Idea</string>
+
+    <string name="created_ideas">Created ideas\nfor today</string>
+    <string name="desc_username">username</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_description">Description</string>
+    <string name="public_chk">Public</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 </resources>
