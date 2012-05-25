@@ -223,4 +223,54 @@ public class RestClient {
         return json;
     }
 
+    public static JSONObject getObject(String url)
+    {
+        String result;
+        JSONObject json = null;
+
+        HttpClient httpclient = new DefaultHttpClient();
+
+        // Prepare a request object
+        HttpGet httpget = new HttpGet(url);
+
+        // Execute the request
+        HttpResponse response;
+        try {
+            response = httpclient.execute(httpget);
+            // Examine the response status
+
+            // Get hold of the response entity
+            HttpEntity entity = response.getEntity();
+            // If the response does not enclose an entity, there is no need
+            // to worry about connection release
+
+            if (entity != null) {
+
+                // A Simple JSON Response Read
+                InputStream instream = entity.getContent();
+                result= convertStreamToString(instream);
+
+                // A Simple JSONObject Creation
+                if (result.equals("null\n") || TextUtils.isEmpty(result)){
+                    json = null;
+                } else {
+                    json=new JSONObject(result);
+                }
+
+
+                // Closing the input stream will trigger connection release
+                instream.close();
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
 }
