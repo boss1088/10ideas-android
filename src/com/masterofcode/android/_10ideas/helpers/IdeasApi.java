@@ -91,4 +91,12 @@ public class IdeasApi {
 
         return new Idea(json);
     }
+
+    public static void vote(String id) throws UnsupportedEncodingException {
+        RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEAS + "/" + id + "/vote.json");
+    }
+
+    public static void publish(String id) throws UnsupportedEncodingException {
+        RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEAS + "/" + id + "/publish.json");
+    }
 }
