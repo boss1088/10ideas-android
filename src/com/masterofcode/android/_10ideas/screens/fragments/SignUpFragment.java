@@ -65,18 +65,18 @@ public class SignUpFragment extends BaseFragment {
     };
 
     private void signUp() {
-        EditText username = (EditText) getView().findViewById(R.id.username);
-        EditText password = (EditText) getView().findViewById(R.id.password);
+        EditText txtUsername = (EditText) getView().findViewById(R.id.username);
+        EditText txtPassword = (EditText) getView().findViewById(R.id.password);
 
-        final String usernameStr = username.getText().toString().trim();
-        final String passwordStr = password.getText().toString().trim();
+        final String username = txtUsername.getText().toString().trim();
+        final String password = txtPassword.getText().toString().trim();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (!usernameStr.equals("") && !passwordStr.equals("")) {
+                if (!username.equals("") && !password.equals("")) {
                     try {
-                        IdeasApi.register(usernameStr, passwordStr);
+                        IdeasApi.register(username, password);
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
@@ -87,7 +87,7 @@ public class SignUpFragment extends BaseFragment {
                         @Override
                         public void run() {
                             getActivity().finish();
-                            getActivity().startActivity(new Intent(getActivity(), DashboardActivity.class));
+                            startActivity(new Intent(getActivity(), DashboardActivity.class));
                         }
                     });
                 } else {

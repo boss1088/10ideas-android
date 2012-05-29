@@ -1,16 +1,22 @@
 package com.masterofcode.android._10ideas.screens.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.masterofcode.android.R;
 import com.masterofcode.android._10ideas.BaseFragment;
+import com.masterofcode.android._10ideas.helpers.IdeasApi;
+import com.masterofcode.android._10ideas.helpers.PreferenceHelper;
 import com.masterofcode.android._10ideas.screens.activities.AuthenticationActivity;
 import com.masterofcode.android._10ideas.screens.activities.DashboardActivity;
+
+import java.io.UnsupportedEncodingException;
 
 public class SignInFragment extends BaseFragment {
 
@@ -49,7 +55,8 @@ public class SignInFragment extends BaseFragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.login:
-                    startActivity(new Intent(getActivity(), DashboardActivity.class));
+                    /*startActivity(new Intent(getActivity(), DashboardActivity.class));*/
+                    signIn();
                     break;
                 case R.id.sign_up:
                     activity.replaceFragment(new SignUpFragment());
@@ -57,4 +64,50 @@ public class SignInFragment extends BaseFragment {
             }
         }
     };
+
+    private void signIn() {
+        EditText txtUsername = (EditText) getView().findViewById(R.id.username);
+        EditText txtPassword = (EditText) getView().findViewById(R.id.password);
+
+        final String username = txtUsername.getText().toString().trim();
+        final String password = txtPassword.getText().toString().trim();
+
+        if (username.equals("") || password.equals("")) {
+            showErrorDialog();
+            return;
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("SignInFragment.signIn PreferenceHelper.isAuthenticated() 1: " + PreferenceHelper.isAuthenticated());
+                    IdeasApi.sign_in(username, password);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println("SignInFragment.signIn PreferenceHelper.isAuthenticated() 2: " + PreferenceHelper.isAuthenticated());
+                if (PreferenceHelper.isAuthenticated()) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getActivity().finish();
+                            startActivity(new Intent(getActivity(), DashboardActivity.class));
+                        }
+                    });
+                } else {
+                    showErrorDialog();
+                }
+            }
+        }).start();
+    }
+
+    private void showErrorDialog() {
+        new AlertDialog.Builder(getActivity())
+                .setCancelable(false)
+                .setTitle("Sign in failed")
+                .setMessage("Something went wrong %)")
+                .setPositiveButton("Ok", null).show();
+    }
 }
