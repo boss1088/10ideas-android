@@ -1,7 +1,7 @@
 <resources>
     <color name="titlebar_bg">#0099cc</color>
     <color name="text_color">#ff000000</color>
-    <color name="default_bg">#eeeeee</color>
+    <color name="default_bg">#FFEEEEEE</color>
     <color name="title_separator">#FFCCCCCC</color>
     <color name="info_bg">#dddddd</color>
 

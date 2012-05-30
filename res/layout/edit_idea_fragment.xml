@@ -45,19 +45,11 @@
             android:orientation="vertical">
 
         <EditText
-                android:id="@+id/idea_title"
+                android:id="@+id/text"
                 style="@style/DefaultEditText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_title"/>
-
-        <EditText
-                android:id="@+id/idea_desc"
-                style="@style/DefaultEditText"
-                android:layout_marginTop="10dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_description"/>
+                android:hint="@string/hint_idea_text"/>
 
         <CheckBox
                 android:id="@+id/public_chk"

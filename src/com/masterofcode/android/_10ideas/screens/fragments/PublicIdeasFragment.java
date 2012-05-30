@@ -8,7 +8,6 @@ import android.widget.*;
 import com.masterofcode.android.R;
 import com.masterofcode.android._10ideas.BaseFragment;
 import com.masterofcode.android._10ideas.helpers.IdeasApi;
-import com.masterofcode.android._10ideas.helpers.PreferenceHelper;
 import com.masterofcode.android._10ideas.helpers.RestClient;
 import com.masterofcode.android._10ideas.objects.Idea;
 import com.masterofcode.android._10ideas.objects.Ideas;
@@ -20,11 +19,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
-public class MyIdeasFragment extends BaseFragment {
+public class PublicIdeasFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.my_ideas_fragment, container, false);
+        return inflater.inflate(R.layout.public_ideas_fragment, container, false);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class MyIdeasFragment extends BaseFragment {
             @Override
             public void run() {
                 try {
-                    Ideas ideas = IdeasApi.getIdeas(RestClient.BASE_IDEAS);
+                    Ideas ideas = IdeasApi.getIdeas(RestClient.BASE_PUBLIC_IDEAS);
                     Vector items = ideas.getItems();
 
                     updateUi(items);
@@ -121,4 +120,5 @@ public class MyIdeasFragment extends BaseFragment {
             }
         });
     }
+
 }

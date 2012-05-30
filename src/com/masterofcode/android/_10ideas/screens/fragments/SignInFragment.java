@@ -39,9 +39,6 @@ public class SignInFragment extends BaseFragment {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView text1 = (TextView) getView().findViewById(R.id.text1);
-                text1.setText(activity.getString(R.string._10_ideas).toUpperCase());
-
                 Button login = (Button) getView().findViewById(R.id.login);
                 Button signUp = (Button) getView().findViewById(R.id.sign_up);
                 login.setOnClickListener(btnClickListener);

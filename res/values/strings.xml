@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">10ideas-android</string>
     <string name="_10_ideas">10 ideas</string>
-    <string name="username">username</string>
+    <string name="email">email</string>
     <string name="password">password</string>
     <string name="login">Login</string>
     <string name="not_have_account">do not have an account?</string>
@@ -11,7 +11,7 @@
     <string name="sign_out">Sign Out</string>
     <string name="dashbrd_my_ideas">My ideas</string>
     <string name="dashbrd_public_ideas">Public ideas</string>
-    <string name="dashbrd_top_10">TOP 10 ideas</string>
+    <string name="dashbrd_top_10">TOP 10</string>
     <string name="dashbrd_add_idea">Add idea</string>
     <string name="desc_refresh">refresh</string>
     <string name="home">Home</string>
@@ -22,9 +22,12 @@
 
     <string name="created_ideas">Created ideas\nfor today</string>
     <string name="desc_username">username</string>
-    <string name="hint_title">Title</string>
+    <string name="hint_idea_text">Enter your idea</string>
     <string name="hint_description">Description</string>
     <string name="public_chk">Public</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="idea_saved">Your idea has been saved</string>
+    <string name="month_year">%1$s\n%2$s</string>
+    <string name="count">%1$s/10</string>
 </resources>

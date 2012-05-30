@@ -37,6 +37,6 @@
     <View
             android:layout_width="fill_parent"
             android:layout_height="1px"
-            android:background="@color/title_separator"/>
+            android:background="#007297"/>
 
 </LinearLayout>

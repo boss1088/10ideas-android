@@ -4,13 +4,16 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:padding="20dip"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:background="#FFF">
 
     <LinearLayout
             android:id="@+id/login_container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:orientation="vertical"
             android:layout_alignParentBottom="true">
 
@@ -29,8 +32,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dip"
-                android:layout_marginLeft="30dip"
-                android:layout_marginRight="30dip"
                 android:text="@string/login"/>
 
     </LinearLayout>
@@ -41,14 +42,33 @@
             android:layout_above="@id/login_container"
             android:gravity="center_vertical"
             android:orientation="vertical">
-        <TextView
-                android:id="@+id/text1"
+
+        <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/_10_ideas"
-                android:textAppearance="@android:style/TextAppearance.Medium"
-                android:textColor="#000"/>
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="6dp"
+                    android:src="@drawable/logo"/>
+
+            <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1px"
+                    android:background="#CCC"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/text1"/>
+
+            <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1px"
+                    android:background="#CCC"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/text1"/>
+        </RelativeLayout>
 
         <EditText
                 android:id="@+id/username"
@@ -56,7 +76,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dip"
-                android:hint="@string/username"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"/>
 
         <EditText
@@ -64,7 +86,9 @@
                 style="@style/DefaultEditText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
+                android:layout_marginTop="8dip"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:hint="@string/password"
                 android:inputType="textPassword"/>
 

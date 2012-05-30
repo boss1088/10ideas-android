@@ -26,22 +26,34 @@
                     android:background="@color/info_bg"
                     android:padding="10dp">
 
+                <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/desc_username"
+                        android:textColor="@color/text_color"
+                        android:drawableLeft="@drawable/ic_user"
+                        android:gravity="center_vertical"/>
+
                 <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true">
+                        android:layout_alignParentLeft="true"
+                        android:layout_toLeftOf="@id/username">
 
                     <TextView
-                            android:id="@+id/day"
+                            android:id="@+id/count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/text_color"
                             android:layout_gravity="center_vertical"
-                            android:textSize="32sp"
-                            android:text="4/10"/>
+                            android:textSize="32sp"/>
 
                     <TextView
-                            android:id="@+id/month_year"
+                            android:id="@+id/text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="6dp"
@@ -52,17 +64,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                        android:id="@+id/username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:contentDescription="@string/desc_username"
-                        android:textColor="@color/text_color"
-                        android:text="Username"/>
-
             </RelativeLayout>
 
             <View
@@ -71,43 +72,56 @@
                     android:layout_below="@+id/created_ideas"
                     android:background="@color/title_separator"/>
 
-            <TableLayout
-                    android:id="@+id/table"
+            <LinearLayout
+                    android:id="@+id/content"
+                    android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_below="@id/created_ideas"
-                    android:layout_margin="10dip"
-                    android:gravity="center_vertical"
-                    android:stretchColumns="0,1">
+                    android:layout_below="@+id/created_ideas"
+                    android:layout_margin="10dip">
 
-                <TableRow>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
                     <Button
-                            android:id="@+id/my_ideas"
+                            android:id="@+id/home_btn_my"
                             style="@style/DashboardButton"
-                            android:text="@string/dashbrd_my_ideas"/>
+                            android:text="@string/dashbrd_my_ideas"
+                            android:drawableTop="@drawable/ic_home_my" />
                     <Button
+                            android:id="@+id/home_btn_public"
                             style="@style/DashboardButton"
-                            android:text="@string/dashbrd_public_ideas"/>
-                </TableRow>
+                            android:text="@string/dashbrd_public_ideas"
+                            android:drawableTop="@drawable/ic_home_public" />
+                </LinearLayout>
 
-                <TableRow>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
                     <Button
+                            android:id="@+id/home_btn_top"
                             style="@style/DashboardButton"
-                            android:text="@string/dashbrd_top_10"/>
+                            android:text="@string/dashbrd_top_10"
+                            android:drawableTop="@drawable/ic_home_top" />
                     <Button
-                            android:id="@+id/add_idea"
+                            android:id="@+id/home_btn_add"
                             style="@style/DashboardButton"
-                            android:text="@string/dashbrd_add_idea"/>
-                </TableRow>
+                            android:text="@string/dashbrd_add_idea"
+                            android:drawableTop="@drawable/ic_home_add" />
+                </LinearLayout>
 
-            </TableLayout>
+            </LinearLayout>
 
             <Button
                     android:id="@+id/sign_out"
                     style="@style/DefaultButton"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/table"
+                    android:layout_below="@id/content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="20dip"
                     android:layout_marginLeft="20dip"
