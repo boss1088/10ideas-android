@@ -21,16 +21,27 @@ import java.util.Vector;
 
 public class PublicIdeasFragment extends BaseFragment {
 
+    private DashboardActivity activity;
+    private View view;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        activity = (DashboardActivity) getActivity();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.public_ideas_fragment, container, false);
+        view = inflater.inflate(R.layout.public_ideas_fragment, container, false);
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(getView(), R.string.my_ideas);
+        updateTitle(view, R.string.my_ideas);
 
         Calendar cal = Calendar.getInstance();
         Integer day = cal.get(Calendar.DATE);
@@ -39,10 +50,10 @@ public class PublicIdeasFragment extends BaseFragment {
         Date date = new Date();
         String month = new SimpleDateFormat("MMMM").format(date);
 
-        TextView dayTxt = (TextView) getView().findViewById(R.id.day);
+        TextView dayTxt = (TextView) view.findViewById(R.id.day);
         dayTxt.setText(day.toString());
 
-        TextView monthYear = (TextView) getView().findViewById(R.id.month_year);
+        TextView monthYear = (TextView) view.findViewById(R.id.month_year);
         monthYear.setText(String.format(getString(R.string.month_year), month, year));
 
         loadData();
@@ -94,9 +105,9 @@ public class PublicIdeasFragment extends BaseFragment {
             }
         };
 
-        final ListView list = (ListView) getView().findViewById(R.id.list);
+        final ListView list = (ListView) view.findViewById(R.id.list);
 
-        getActivity().runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 list.setAdapter(adapter);
@@ -112,7 +123,7 @@ public class PublicIdeasFragment extends BaseFragment {
             }
         });
 
-        ImageButton refresh = (ImageButton) getView().findViewById(R.id.refresh);
+        ImageButton refresh = (ImageButton) view.findViewById(R.id.refresh);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

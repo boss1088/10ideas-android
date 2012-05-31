@@ -78,13 +78,11 @@ public class SignInFragment extends BaseFragment {
             @Override
             public void run() {
                 try {
-                    System.out.println("SignInFragment.signIn PreferenceHelper.isAuthenticated() 1: " + PreferenceHelper.isAuthenticated());
                     IdeasApi.sign_in(username, password);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
 
-                System.out.println("SignInFragment.signIn PreferenceHelper.isAuthenticated() 2: " + PreferenceHelper.isAuthenticated());
                 if (PreferenceHelper.isAuthenticated()) {
                     activity.runOnUiThread(new Runnable() {
                         @Override

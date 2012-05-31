@@ -21,8 +21,6 @@ public class AuthenticationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.authentication_activity);
 
-        System.out.println("AuthenticationActivity.onCreate PreferenceHelper.isAuthenticated(): " + PreferenceHelper.isAuthenticated());
-
         if (savedInstanceState == null) {
             if (!PreferenceHelper.isAuthenticated()) {
                 getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new SignInFragment()).commit();

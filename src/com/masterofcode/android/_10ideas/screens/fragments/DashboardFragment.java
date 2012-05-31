@@ -22,25 +22,42 @@ import java.util.Vector;
 
 public class DashboardFragment extends BaseFragment {
 
-    DashboardActivity activity;
+    private DashboardActivity activity;
+    private View view;
+    private int count;
+    private boolean restore;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+
         activity = (DashboardActivity) getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dashboard_fragment, container, false);
+        view = inflater.inflate(R.layout.dashboard_fragment, container, false);
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(getView(), R.string.home);
-        loadData();
+        updateTitle(view, R.string.home);
+
+        if (restore) {
+            updateUi(count);
+        } else {
+            loadData();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        restore = true;
     }
 
     private void loadData() {
@@ -49,8 +66,9 @@ public class DashboardFragment extends BaseFragment {
             public void run() {
                 try {
                     Ideas ideas = IdeasApi.getIdeas(RestClient.BASE_IDEAS);
+                    count = ideas.getTotal();
 
-                    updateUi(ideas.getTotal());
+                    updateUi(count);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -62,22 +80,22 @@ public class DashboardFragment extends BaseFragment {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView count = (TextView) getView().findViewById(R.id.count);
+                TextView count = (TextView) view.findViewById(R.id.count);
                 count.setText(String.format(getString(R.string.count), total));
 
-                TextView username = (TextView) getView().findViewById(R.id.username);
+                TextView username = (TextView) view.findViewById(R.id.username);
                 username.setText(PreferenceHelper.getUserEmail());
 
-                Button signOut = (Button) getView().findViewById(R.id.sign_out);
+                Button signOut = (Button) view.findViewById(R.id.sign_out);
                 signOut.setOnClickListener(btnClickListener);
 
-                Button myIdeas = (Button) getView().findViewById(R.id.home_btn_my);
+                Button myIdeas = (Button) view.findViewById(R.id.home_btn_my);
                 myIdeas.setOnClickListener(btnClickListener);
 
-                Button publicIdeas = (Button) getView().findViewById(R.id.home_btn_public);
+                Button publicIdeas = (Button) view.findViewById(R.id.home_btn_public);
                 publicIdeas.setOnClickListener(btnClickListener);
 
-                Button addIdea = (Button) getView().findViewById(R.id.home_btn_add);
+                Button addIdea = (Button) view.findViewById(R.id.home_btn_add);
                 addIdea.setOnClickListener(btnClickListener);
             }
         });
@@ -91,13 +109,13 @@ public class DashboardFragment extends BaseFragment {
                     // TODO sign out
                     break;
                 case R.id.home_btn_my:
-                    activity.replaceFragment(new MyIdeasFragment());
+                    ((DashboardActivity) getActivity()).replaceFragment(new MyIdeasFragment());
                     break;
                 case R.id.home_btn_public:
-                    activity.replaceFragment(new PublicIdeasFragment());
+                    ((DashboardActivity) getActivity()).replaceFragment(new PublicIdeasFragment());
                     break;
                 case R.id.home_btn_add:
-                    activity.replaceFragment(new EditIdeaFragment());
+                    ((DashboardActivity) getActivity()).replaceFragment(new EditIdeaFragment());
                     break;
             }
         }
