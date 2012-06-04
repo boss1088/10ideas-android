@@ -36,7 +36,7 @@ public class IdeasApi {
         //TODO rebuild if need some return
     }
 
-    public static void sign_in(String userName, String pass) throws UnsupportedEncodingException {
+    public static void sign_in(String userName, String pass) throws UnsupportedEncodingException, Exception {
         MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
         reqEntity.addPart("user[email]", new StringBody(userName));
@@ -44,12 +44,14 @@ public class IdeasApi {
 
         JSONObject json = RestClient.post(RestClient.BASE_URL + RestClient.BASE_USERS_SIGN_IN, reqEntity);
 
+        if (json == null) {
+            throw new Exception();
+        }
+
         PreferenceHelper.setUserEmail(userName);
         PreferenceHelper.setUserPass(pass);
         PreferenceHelper.setAuthToken(json.optString("auth_token"));
         PreferenceHelper.setUserId(json.optString("user_id"));
-
-        //TODO rebuild if need some return
     }
 
     public static void create(String essential, Boolean isPublic) throws UnsupportedEncodingException {

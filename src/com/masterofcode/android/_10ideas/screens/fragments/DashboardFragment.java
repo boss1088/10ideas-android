@@ -106,7 +106,9 @@ public class DashboardFragment extends BaseFragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.sign_out:
-                    // TODO sign out
+                    PreferenceHelper.clearAuthentication();
+                    getActivity().startActivity(new Intent(getActivity(), AuthenticationActivity.class));
+                    getActivity().finish();
                     break;
                 case R.id.home_btn_my:
                     ((DashboardActivity) getActivity()).replaceFragment(new MyIdeasFragment());

@@ -131,6 +131,7 @@ public class PreferenceHelper {
         updatePref(AUTH_TOKEN, "false");
         updatePref(USER_PASSWORD, "false");
         updatePref(USER_EMAIL, "false");
+        updatePref(USER_ID, "false");
 
     }
 

@@ -80,7 +80,10 @@ public class SignInFragment extends BaseFragment {
                 try {
                     IdeasApi.sign_in(username, password);
                 } catch (UnsupportedEncodingException e) {
+                    showErrorDialog();
                     e.printStackTrace();
+                } catch (Exception e) {
+                    showErrorDialog();
                 }
 
                 if (PreferenceHelper.isAuthenticated()) {
