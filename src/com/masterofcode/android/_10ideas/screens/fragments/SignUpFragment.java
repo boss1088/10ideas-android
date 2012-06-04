@@ -72,6 +72,8 @@ public class SignUpFragment extends BaseFragment {
         final String username = txtUsername.getText().toString().trim();
         final String password = txtPassword.getText().toString().trim();
 
+        showProgressDialog();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -79,8 +81,9 @@ public class SignUpFragment extends BaseFragment {
                     try {
                         IdeasApi.register(username, password);
                     } catch (UnsupportedEncodingException e) {
-                        showErrorDialog();
                         e.printStackTrace();
+                    } finally {
+                        dissmissProgressDialog();
                     }
                 }
 
@@ -92,6 +95,9 @@ public class SignUpFragment extends BaseFragment {
                             startActivity(new Intent(getActivity(), DashboardActivity.class));
                         }
                     });
+                } else if (!PreferenceHelper.getError().equals("false")) {
+                    showErrorDialog(PreferenceHelper.getError());
+                    PreferenceHelper.setError("false");
                 } else {
                     showErrorDialog();
                 }

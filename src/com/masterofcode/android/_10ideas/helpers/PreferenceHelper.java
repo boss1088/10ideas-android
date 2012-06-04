@@ -21,6 +21,7 @@ public class PreferenceHelper {
     public static final String USER_PASSWORD = "user_password";
     public static final String USER_EMAIL = "user_email";
     public static final String USER_ID = "user_id";
+    public static final String ERROR = "error";
 
     static Context mContext = null;
     static SharedPreferences prefs = null;
@@ -125,6 +126,14 @@ public class PreferenceHelper {
 
     public static String getUserId() {
         return prefs.getString(USER_ID, "false");
+    }
+
+    public static void setError(String error) {
+        updatePref(ERROR, error);
+    }
+
+    public static String getError() {
+        return prefs.getString(ERROR, "false");
     }
 
     public static void clearAuthentication() {

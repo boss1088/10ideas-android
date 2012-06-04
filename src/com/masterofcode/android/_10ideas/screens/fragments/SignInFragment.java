@@ -78,16 +78,23 @@ public class SignInFragment extends BaseFragment {
             return;
         }
 
+        showProgressDialog();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     IdeasApi.sign_in(username, password);
                 } catch (UnsupportedEncodingException e) {
-                    showErrorDialog();
+                    //showErrorDialog();
                     e.printStackTrace();
-                } catch (Exception e) {
-                    showErrorDialog();
+                } finally {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dissmissProgressDialog();
+                        }
+                    });
                 }
 
                 if (PreferenceHelper.isAuthenticated()) {
@@ -98,6 +105,9 @@ public class SignInFragment extends BaseFragment {
                             startActivity(new Intent(getActivity(), DashboardActivity.class));
                         }
                     });
+                } else if (!PreferenceHelper.getError().equals("false")) {
+                    showErrorDialog(PreferenceHelper.getError());
+                    PreferenceHelper.setError("false");
                 } else {
                     showErrorDialog();
                 }
