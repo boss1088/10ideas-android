@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.masterofcode.android.R;
 import com.masterofcode.android._10ideas.BaseFragment;
 import com.masterofcode.android._10ideas.helpers.IdeasApi;
+import com.masterofcode.android._10ideas.helpers.PreferenceHelper;
 import com.masterofcode.android._10ideas.objects.Idea;
+
+import java.io.UnsupportedEncodingException;
 
 public class ViewIdeaFragment extends BaseFragment {
 
@@ -48,11 +52,13 @@ public class ViewIdeaFragment extends BaseFragment {
     }
 
     private void loadData() {
+        showProgressDialog();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Idea idea = IdeasApi.getIdeaById(id);
                 updateUi(idea);
+                dissmissProgressDialog();
             }
         }).start();
     }
@@ -63,7 +69,49 @@ public class ViewIdeaFragment extends BaseFragment {
             public void run() {
                 TextView text = (TextView) getView().findViewById(R.id.text);
                 text.setText(idea.getEssential());
+
+                Button button = (Button) getView().findViewById(R.id.idea_button);
+                String userId = idea.getUser_id();
+                if (userId.equals(PreferenceHelper.getUserId()) && !idea.isPublic()) {
+                    button.setText("Publish");
+                    button.setOnClickListener(publish);
+                } else {
+                    button.setText("Vote");
+                    button.setOnClickListener(vote);
+                }
             }
         });
     }
+
+    View.OnClickListener vote = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        IdeasApi.vote(id);
+                    } catch (UnsupportedEncodingException e) {
+                        showErrorDialog();
+                    }
+                }
+            }).start();
+        }
+    };
+
+    View.OnClickListener publish = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        IdeasApi.publish(id);
+                    } catch (UnsupportedEncodingException e) {
+                        showErrorDialog();
+                    }
+                }
+            }).start();
+        }
+    };
 }
