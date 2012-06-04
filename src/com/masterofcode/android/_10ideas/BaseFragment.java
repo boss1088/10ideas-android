@@ -49,6 +49,19 @@ public class BaseFragment extends Fragment {
         });
     }
 
+    public void showComingSoonDialog() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(getActivity())
+                        .setCancelable(false)
+                        .setTitle("Coming soon")
+                        .setMessage("Sorry. This feature not available now.")
+                        .setPositiveButton("Ok", null).show();
+            }
+        });
+    }
+
     public void showNoInternetDialog() {
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -66,7 +79,7 @@ public class BaseFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                progressDialog = ProgressDialog.show(getActivity(), "Logginig", "loggining", false, false);
+                progressDialog = ProgressDialog.show(getActivity(), "Loading", "loading", false, false);
             }
         });
     }

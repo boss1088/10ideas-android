@@ -101,7 +101,7 @@ public class PreferenceHelper {
     }
 
     public static String getAuthToken() {
-        return prefs.getString(AUTH_TOKEN, "false");
+        return prefs.getString(AUTH_TOKEN, "");
     }
 
     public static void setUserPass(String userPass) {
@@ -109,7 +109,7 @@ public class PreferenceHelper {
     }
 
     public static String getUserPass() {
-        return prefs.getString(USER_PASSWORD, "false");
+        return prefs.getString(USER_PASSWORD, "");
     }
 
     public static void setUserEmail(String userEmail) {
@@ -117,7 +117,7 @@ public class PreferenceHelper {
     }
 
     public static String getUserEmail() {
-        return prefs.getString(USER_EMAIL, "false");
+        return prefs.getString(USER_EMAIL, "");
     }
 
     public static void setUserId(String userId) {
@@ -125,7 +125,7 @@ public class PreferenceHelper {
     }
 
     public static String getUserId() {
-        return prefs.getString(USER_ID, "false");
+        return prefs.getString(USER_ID, "");
     }
 
     public static void setError(String error) {
@@ -133,19 +133,19 @@ public class PreferenceHelper {
     }
 
     public static String getError() {
-        return prefs.getString(ERROR, "false");
+        return prefs.getString(ERROR, "");
     }
 
     public static void clearAuthentication() {
-        updatePref(AUTH_TOKEN, "false");
-        updatePref(USER_PASSWORD, "false");
-        updatePref(USER_EMAIL, "false");
-        updatePref(USER_ID, "false");
+        updatePref(AUTH_TOKEN, "");
+        updatePref(USER_PASSWORD, "");
+        updatePref(USER_EMAIL, "");
+        updatePref(USER_ID, "");
 
     }
 
     public static boolean isAuthenticated() {
-        if (getAuthToken().equals("false") && getUserPass().equals("false")) {
+        if (getAuthToken().equals("") && getUserPass().equals("")) {
             return false;
         } else {
             return true;

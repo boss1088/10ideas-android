@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.masterofcode.android.R;
 import com.masterofcode.android._10ideas.BaseFragment;
 import com.masterofcode.android._10ideas.helpers.IdeasApi;
@@ -83,6 +84,14 @@ public class ViewIdeaFragment extends BaseFragment {
         });
     }
 
+    private boolean isSuccess(String code) {
+        if (code.equals("200") || code.equals("201")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     View.OnClickListener vote = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -90,7 +99,17 @@ public class ViewIdeaFragment extends BaseFragment {
                 @Override
                 public void run() {
                     try {
-                        IdeasApi.vote(id);
+                        String response = IdeasApi.vote(id);
+                        if (isSuccess(response)) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(), "success", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        } else {
+                            showErrorDialog();
+                        }
                     } catch (UnsupportedEncodingException e) {
                         showErrorDialog();
                     }
@@ -106,7 +125,18 @@ public class ViewIdeaFragment extends BaseFragment {
                 @Override
                 public void run() {
                     try {
-                        IdeasApi.publish(id);
+                        String response = IdeasApi.publish(id);
+                        if (isSuccess(response)) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(), "success", Toast.LENGTH_LONG).show();
+                                    loadData();
+                                }
+                            });
+                        } else {
+                            showErrorDialog();
+                        }
                     } catch (UnsupportedEncodingException e) {
                         showErrorDialog();
                     }

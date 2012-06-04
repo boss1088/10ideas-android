@@ -27,15 +27,19 @@ public class IdeasApi {
         reqEntity.addPart("user[password]", new StringBody(pass));
 
         JSONObject json = RestClient.post(RestClient.BASE_URL + RestClient.BASE_USERS, reqEntity);
+        String error = checkForError(json);
 
         if (json == null) {
             throw new UnsupportedEncodingException();
+        } else if (!error.equals("")) {
+                PreferenceHelper.setError(error);
+                return;
         }
 
         PreferenceHelper.setUserEmail(userName);
         PreferenceHelper.setUserPass(pass);
-        PreferenceHelper.setAuthToken(json.optString("auth_token"));
-        PreferenceHelper.setUserId(json.optString("user_id"));
+        PreferenceHelper.setAuthToken(json.optString("auth_token").trim());
+        PreferenceHelper.setUserId(json.optString("user_id").trim());
     }
 
     public static void sign_in(String userName, String pass) throws UnsupportedEncodingException {
@@ -45,11 +49,12 @@ public class IdeasApi {
         reqEntity.addPart("user[password]", new StringBody(pass));
 
         JSONObject json = RestClient.post(RestClient.BASE_URL + RestClient.BASE_USERS_SIGN_IN, reqEntity);
+        String error = checkForError(json);
 
         if (json == null) {
             throw new UnsupportedEncodingException();
-        } else if (json.optString("error").equals("")) {
-            PreferenceHelper.setError(json.optString("error"));
+        }  else if (!error.equals("")) {
+            PreferenceHelper.setError(error);
             return;
         }
 
@@ -99,11 +104,29 @@ public class IdeasApi {
         return new Idea(json);
     }
 
-    public static void vote(String id) throws UnsupportedEncodingException {
-        RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEAS + "/" + id + "/vote.json");
+    public static String vote(String id) throws UnsupportedEncodingException {
+        MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        reqEntity.addPart("auth_token", new StringBody(PreferenceHelper.getAuthToken()));
+
+        return RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEA + "/" + id + "/vote.json", reqEntity);
     }
 
-    public static void publish(String id) throws UnsupportedEncodingException {
-        RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEAS + "/" + id + "/publish.json");
+    public static String publish(String id) throws UnsupportedEncodingException {
+        MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        reqEntity.addPart("auth_token", new StringBody(PreferenceHelper.getAuthToken()));
+
+        return RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEA + "/" + id + "/publish.json", reqEntity);
+    }
+
+    private static String checkForError(JSONObject json) {
+        if (!json.optString("errors").trim().equals("")) {
+            return json.optString("errors").trim();
+        }
+
+        if (!json.optString("error").trim().equals("")) {
+            return json.optString("error").trim();
+        }
+
+        return "";
     }
 }

@@ -48,8 +48,10 @@ public class DashboardFragment extends BaseFragment {
         updateTitle(view, R.string.home);
 
         if (restore) {
-            updateUi(count);
+            updateUi();
+            updateCount(count);
         } else {
+            updateUi();
             loadData();
         }
     }
@@ -61,28 +63,53 @@ public class DashboardFragment extends BaseFragment {
     }
 
     private void loadData() {
+        showProgressIndicator();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Ideas ideas = IdeasApi.getIdeas(RestClient.BASE_IDEAS);
                     count = ideas.getTotal();
-
-                    updateUi(count);
                 } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                    showErrorDialog();
+                } finally {
+                    hideProgressIndicator();
                 }
             }
         }).start();
     }
 
-    private void updateUi(final int total) {
+    private void showProgressIndicator() {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView count = (TextView) view.findViewById(R.id.count);
-                count.setText(String.format(getString(R.string.count), total));
+                activity.findViewById(R.id.count).setVisibility(View.GONE);
+                activity.findViewById(R.id.progress).setVisibility(View.VISIBLE);
+            }
+        });
+    }
 
+    private void hideProgressIndicator() {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activity.findViewById(R.id.count).setVisibility(View.VISIBLE);
+                activity.findViewById(R.id.progress).setVisibility(View.GONE);
+
+                updateCount(count);
+            }
+        });
+    }
+
+    private void updateCount(int total) {
+        TextView count = (TextView) view.findViewById(R.id.count);
+        count.setText(String.format(getString(R.string.count), total));
+    }
+
+    private void updateUi() {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
                 TextView username = (TextView) view.findViewById(R.id.username);
                 username.setText(PreferenceHelper.getUserEmail());
 
@@ -97,6 +124,9 @@ public class DashboardFragment extends BaseFragment {
 
                 Button addIdea = (Button) view.findViewById(R.id.home_btn_add);
                 addIdea.setOnClickListener(btnClickListener);
+
+                Button topIdeas = (Button) view.findViewById(R.id.home_btn_top);
+                topIdeas.setOnClickListener(btnClickListener);
             }
         });
     }
@@ -111,13 +141,28 @@ public class DashboardFragment extends BaseFragment {
                     getActivity().finish();
                     break;
                 case R.id.home_btn_my:
-                    ((DashboardActivity) getActivity()).replaceFragment(new MyIdeasFragment());
+                    if (haveInternet()) {
+                        ((DashboardActivity) getActivity()).replaceFragment(new MyIdeasFragment());
+                    } else {
+                        showNoInternetDialog();
+                    }
                     break;
                 case R.id.home_btn_public:
-                    ((DashboardActivity) getActivity()).replaceFragment(new PublicIdeasFragment());
+                    if (haveInternet()) {
+                        ((DashboardActivity) getActivity()).replaceFragment(new PublicIdeasFragment());
+                    } else {
+                        showNoInternetDialog();
+                    }
                     break;
                 case R.id.home_btn_add:
-                    ((DashboardActivity) getActivity()).replaceFragment(new EditIdeaFragment());
+                    if (haveInternet()) {
+                        ((DashboardActivity) getActivity()).replaceFragment(new EditIdeaFragment());
+                    } else {
+                        showNoInternetDialog();
+                    }
+                    break;
+                case R.id.home_btn_top:
+                    showComingSoonDialog();
                     break;
             }
         }
