@@ -53,7 +53,11 @@ public class SignInFragment extends BaseFragment {
             switch (view.getId()) {
                 case R.id.login:
                     /*startActivity(new Intent(getActivity(), DashboardActivity.class));*/
-                    signIn();
+                    if (haveInternet()) {
+                        signIn();
+                    } else {
+                        showNoInternetDialog();
+                    }
                     break;
                 case R.id.sign_up:
                     activity.replaceFragment(new SignUpFragment());
@@ -101,11 +105,5 @@ public class SignInFragment extends BaseFragment {
         }).start();
     }
 
-    private void showErrorDialog() {
-        new AlertDialog.Builder(getActivity())
-                .setCancelable(false)
-                .setTitle("Sign in failed")
-                .setMessage("Something went wrong %)")
-                .setPositiveButton("Ok", null).show();
-    }
+
 }

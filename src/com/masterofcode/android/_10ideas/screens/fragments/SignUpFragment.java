@@ -55,7 +55,11 @@ public class SignUpFragment extends BaseFragment {
                     activity.onBackPressed();
                     break;
                 case R.id.sign_up:
-                    signUp();
+                    if (haveInternet()) {
+                        signUp();
+                    } else {
+                        showNoInternetDialog();
+                    }
                     break;
             }
         }
@@ -75,6 +79,7 @@ public class SignUpFragment extends BaseFragment {
                     try {
                         IdeasApi.register(username, password);
                     } catch (UnsupportedEncodingException e) {
+                        showErrorDialog();
                         e.printStackTrace();
                     }
                 }
@@ -92,13 +97,5 @@ public class SignUpFragment extends BaseFragment {
                 }
             }
         }).start();
-    }
-
-    private void showErrorDialog() {
-        new AlertDialog.Builder(getActivity())
-                .setCancelable(false)
-                .setTitle("Register failed")
-                .setMessage("Something went wrong %)")
-                .setPositiveButton("Ok", null).show();
     }
 }

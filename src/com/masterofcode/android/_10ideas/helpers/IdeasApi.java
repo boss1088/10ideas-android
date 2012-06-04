@@ -28,12 +28,14 @@ public class IdeasApi {
 
         JSONObject json = RestClient.post(RestClient.BASE_URL + RestClient.BASE_USERS, reqEntity);
 
+        if (json == null) {
+            throw new UnsupportedEncodingException();
+        }
+
         PreferenceHelper.setUserEmail(userName);
         PreferenceHelper.setUserPass(pass);
         PreferenceHelper.setAuthToken(json.optString("auth_token"));
         PreferenceHelper.setUserId(json.optString("user_id"));
-
-        //TODO rebuild if need some return
     }
 
     public static void sign_in(String userName, String pass) throws UnsupportedEncodingException, Exception {
