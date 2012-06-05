@@ -1,5 +1,7 @@
 package com.masterofcode.android._10ideas.screens.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +24,8 @@ import java.util.Vector;
 
 public class DashboardFragment extends BaseFragment {
 
+    private static DashboardFragment Instance = null;
+
     private DashboardActivity activity;
     private View view;
     private int count;
@@ -31,6 +35,7 @@ public class DashboardFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        Instance = this;
 
         activity = (DashboardActivity) getActivity();
     }
@@ -50,6 +55,7 @@ public class DashboardFragment extends BaseFragment {
         if (restore) {
             updateUi();
             updateCount(count);
+            restore = false;
         } else {
             updateUi();
             loadData();
@@ -72,6 +78,8 @@ public class DashboardFragment extends BaseFragment {
                     count = ideas.getTotal();
                 } catch (UnsupportedEncodingException e) {
                     showErrorDialog();
+                } catch (NullPointerException npx) {
+                    showErrorDialog("Network connection problem");
                 } finally {
                     hideProgressIndicator();
                 }
@@ -83,8 +91,8 @@ public class DashboardFragment extends BaseFragment {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                activity.findViewById(R.id.count).setVisibility(View.GONE);
-                activity.findViewById(R.id.progress).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.count).setVisibility(View.GONE);
+                view.findViewById(R.id.progress).setVisibility(View.VISIBLE);
             }
         });
     }
@@ -93,8 +101,8 @@ public class DashboardFragment extends BaseFragment {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                activity.findViewById(R.id.count).setVisibility(View.VISIBLE);
-                activity.findViewById(R.id.progress).setVisibility(View.GONE);
+                view.findViewById(R.id.count).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.progress).setVisibility(View.GONE);
 
                 updateCount(count);
             }
@@ -167,4 +175,20 @@ public class DashboardFragment extends BaseFragment {
             }
         }
     };
+
+    public static class BroadcastListener extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            System.out.println("DashboardFragment$BroadcastListener.onReceive Instance: " + Instance);
+            if (Instance == null) {
+                return;
+            }
+
+            if (Intents.isIdeaCreatedBroadcastIntent(intent)) {
+                System.out.println("DashboardFragment$BroadcastListener.onReceive isIdeaCreatedBroadcastIntent");
+                Instance.loadData();
+            }
+        }
+    }
 }

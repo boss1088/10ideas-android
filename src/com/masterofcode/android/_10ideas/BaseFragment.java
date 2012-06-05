@@ -29,7 +29,7 @@ public class BaseFragment extends Fragment {
             public void run() {
                 new AlertDialog.Builder(getActivity())
                         .setCancelable(false)
-                        .setTitle("Sign in failed")
+                        .setTitle("Error!")
                         .setMessage(error)
                         .setPositiveButton("Ok", null).show();
             }
@@ -68,8 +68,8 @@ public class BaseFragment extends Fragment {
             public void run() {
                 new AlertDialog.Builder(getActivity())
                         .setCancelable(false)
-                        .setTitle("Sign in failed")
-                        .setMessage("Check you connection")
+                        .setTitle("No Connection")
+                        .setMessage("Sorry, server is unreachable. Please check you connection and/or try again.")
                         .setPositiveButton("Ok", null).show();
             }
         });

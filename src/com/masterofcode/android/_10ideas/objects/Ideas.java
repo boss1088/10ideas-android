@@ -18,16 +18,17 @@ public class Ideas {
     Vector<Idea> _ideas = new Vector<Idea>();
     protected int total = 0;
 
-    public Ideas(){}
+    public Ideas() {
+    }
 
-    public static Ideas fromJson(JSONArray json) throws JSONException{
+    public static Ideas fromJson(JSONArray json) throws JSONException/*, NullPointerException*/ {
         Ideas collection = new Ideas();
         collection.setTotal(json.length());
 
         for (int i = 0; i < json.length(); i++) {
             JSONObject obj = (JSONObject) json.get(i);
             /*if(obj.optJSONObject("seminar").optInt("status")==3){*/
-                collection.addSeminar(new Idea(obj));
+            collection.addSeminar(new Idea(obj));
             /*}*/
         }
         collection.setTotal(collection.getItems().size());

@@ -83,7 +83,7 @@ public class IdeasApi {
         //TODO rebuild if need some return
     }
 
-    public static Ideas getIdeas(String wichIdeas) throws UnsupportedEncodingException {
+    public static Ideas getIdeas(String wichIdeas) throws UnsupportedEncodingException, NullPointerException {
 
         Ideas ideas = null;
         JSONArray jsonArray = RestClient.get(RestClient.BASE_URL + wichIdeas
@@ -93,7 +93,10 @@ public class IdeasApi {
            ideas = Ideas.fromJson(jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException npe) {
+            throw npe;
         }
+
         return ideas;
     }
 

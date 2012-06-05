@@ -23,6 +23,14 @@
 
         <activity android:name="._10ideas.screens.activities.DashboardActivity"/>
 
+        <!-- Broadcast receivers -->
+
+        <receiver android:name="._10ideas.screens.fragments.DashboardFragment$BroadcastListener">
+            <intent-filter>
+                <action android:name="com.masterofcode.android._10ideas.ACTION_IDEA_CREATED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

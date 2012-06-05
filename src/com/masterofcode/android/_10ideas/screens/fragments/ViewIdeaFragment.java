@@ -12,6 +12,7 @@ import com.masterofcode.android._10ideas.BaseFragment;
 import com.masterofcode.android._10ideas.helpers.IdeasApi;
 import com.masterofcode.android._10ideas.helpers.PreferenceHelper;
 import com.masterofcode.android._10ideas.objects.Idea;
+import com.masterofcode.android._10ideas.screens.activities.DashboardActivity;
 
 import java.io.UnsupportedEncodingException;
 
@@ -20,6 +21,7 @@ public class ViewIdeaFragment extends BaseFragment {
     private static final String ID = "id";
 
     private String id;
+    private DashboardActivity activity;
 
     public static ViewIdeaFragment newInstance(String id) {
         ViewIdeaFragment f = new ViewIdeaFragment();
@@ -32,6 +34,8 @@ public class ViewIdeaFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        activity = (DashboardActivity) getActivity();
 
         Bundle args = getArguments();
         if (args != null) {
@@ -65,7 +69,7 @@ public class ViewIdeaFragment extends BaseFragment {
     }
 
     private void updateUi(final Idea idea) {
-        getActivity().runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 TextView text = (TextView) getView().findViewById(R.id.text);
@@ -101,7 +105,7 @@ public class ViewIdeaFragment extends BaseFragment {
                     try {
                         String response = IdeasApi.vote(id);
                         if (isSuccess(response)) {
-                            getActivity().runOnUiThread(new Runnable() {
+                            activity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Toast.makeText(getActivity(), "success", Toast.LENGTH_LONG).show();
@@ -127,7 +131,7 @@ public class ViewIdeaFragment extends BaseFragment {
                     try {
                         String response = IdeasApi.publish(id);
                         if (isSuccess(response)) {
-                            getActivity().runOnUiThread(new Runnable() {
+                            activity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Toast.makeText(getActivity(), "success", Toast.LENGTH_LONG).show();
