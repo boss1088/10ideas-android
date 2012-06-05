@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.masterofcode.android.R;
 import com.masterofcode.android._10ideas.BaseFragment;
+import com.masterofcode.android._10ideas.Intents;
 import com.masterofcode.android._10ideas.helpers.IdeasApi;
 
 import java.io.UnsupportedEncodingException;
@@ -41,15 +42,18 @@ public class EditIdeaFragment extends BaseFragment {
         final String username = txtTitle.getText().toString().trim();
         final CheckBox checkBox = (CheckBox) getView().findViewById(R.id.public_chk);
 
+        showProgressDialog();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     IdeasApi.create(username, checkBox.isChecked());
-                    
+
                     goBack();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
+                } finally {
+                    dissmissProgressDialog();
                 }
             }
         }).start();
@@ -58,6 +62,7 @@ public class EditIdeaFragment extends BaseFragment {
     private void goBack() {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
+                getActivity().sendBroadcast(Intents.getIdeaCreatedBroadcastIntent());
                 Toast.makeText(getActivity(), getString(R.string.idea_saved), Toast.LENGTH_SHORT);
                 getActivity().onBackPressed();
             }

@@ -52,7 +52,7 @@ public class SignUpFragment extends BaseFragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.login:
-                    activity.onBackPressed();
+                    getActivity().onBackPressed();
                     break;
                 case R.id.sign_up:
                     if (haveInternet()) {

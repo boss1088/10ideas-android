@@ -23,10 +23,13 @@ public class PublicIdeasFragment extends BaseFragment {
 
     private DashboardActivity activity;
     private View view;
+    private Vector items;
+    private boolean restore;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
 
         activity = (DashboardActivity) getActivity();
     }
@@ -56,20 +59,34 @@ public class PublicIdeasFragment extends BaseFragment {
         TextView monthYear = (TextView) view.findViewById(R.id.month_year);
         monthYear.setText(String.format(getString(R.string.month_year), month, year));
 
-        loadData();
+        if (restore && items != null) {
+            updateUi(items);
+            restore = false;
+        } else {
+            loadData();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        restore = true;
     }
 
     private void loadData() {
+        showProgressDialog();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Ideas ideas = IdeasApi.getIdeas(RestClient.BASE_PUBLIC_IDEAS);
-                    Vector items = ideas.getItems();
+                    items = ideas.getItems();
 
                     updateUi(items);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
+                } finally {
+                    dissmissProgressDialog();
                 }
             }
         }).start();
