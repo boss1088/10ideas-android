@@ -21,7 +21,7 @@ public class Ideas {
     public Ideas() {
     }
 
-    public static Ideas fromJson(JSONArray json) throws JSONException/*, NullPointerException*/ {
+    public static Ideas fromJson(JSONArray json) throws JSONException {
         Ideas collection = new Ideas();
         collection.setTotal(json.length());
 
