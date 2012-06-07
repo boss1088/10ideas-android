@@ -101,7 +101,7 @@ public class IdeasApi {
     }
 
     public static Idea getIdeaById(String id) {
-        JSONObject json = RestClient.getObject(RestClient.BASE_URL + "ideas/" + id + ".json"
+        JSONObject json = RestClient.getObject(RestClient.BASE_URL + RestClient.BASE_IDEA + "/" + id + ".json"
                 + "?auth_token=" + PreferenceHelper.getAuthToken());
 
         return new Idea(json);

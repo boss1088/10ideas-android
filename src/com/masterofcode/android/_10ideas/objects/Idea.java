@@ -28,7 +28,7 @@ public class Idea {
         setCreated_at(json.optString("created_at"));
         setUpdated_at(json.optString("updated_at"));
         setEssential(json.optString("essential"));
-        setPublic(json.optBoolean("isPublic"));
+        setPublic(json.optBoolean("public"));
         setUser_id(json.optString("user_id"));
         setVotes(json.optInt("votes"));
     }
