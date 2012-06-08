@@ -30,7 +30,12 @@ public class Idea {
         setEssential(json.optString("essential"));
         setPublic(json.optBoolean("public"));
         setUser_id(json.optString("user_id"));
-        setVotes(json.optInt("votes"));
+
+        if (json.optJSONArray("votes") != null) {
+            setVotes(json.optJSONArray("votes").length());
+        } else {
+            setVotes(0);
+        }
     }
 
     public String getId() {

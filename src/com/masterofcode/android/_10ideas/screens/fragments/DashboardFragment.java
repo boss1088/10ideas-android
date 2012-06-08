@@ -20,7 +20,6 @@ import com.masterofcode.android._10ideas.screens.activities.AuthenticationActivi
 import com.masterofcode.android._10ideas.screens.activities.DashboardActivity;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Vector;
 
 public class DashboardFragment extends BaseFragment {
 
@@ -74,7 +73,7 @@ public class DashboardFragment extends BaseFragment {
             @Override
             public void run() {
                 try {
-                    Ideas ideas = IdeasApi.getIdeas(RestClient.BASE_IDEAS);
+                    Ideas ideas = IdeasApi.getIdeas(RestClient.BASE_MY_IDEAS);
                     count = ideas.getTotal();
                 } catch (UnsupportedEncodingException e) {
                     showErrorDialog();
@@ -170,7 +169,11 @@ public class DashboardFragment extends BaseFragment {
                     }
                     break;
                 case R.id.home_btn_top:
-                    showComingSoonDialog();
+                    if (haveInternet()) {
+                        ((DashboardActivity) getActivity()).replaceFragment(new TopIdeasFragment());
+                    } else {
+                        showNoInternetDialog();
+                    }
                     break;
             }
         }

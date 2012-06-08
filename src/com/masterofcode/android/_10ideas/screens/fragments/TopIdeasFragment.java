@@ -19,7 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
-public class MyIdeasFragment extends BaseFragment {
+public class TopIdeasFragment extends BaseFragment {
 
     private DashboardActivity activity;
     private View view;
@@ -36,7 +36,7 @@ public class MyIdeasFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.my_ideas_fragment, container, false);
+        view = inflater.inflate(R.layout.top_ideas_fragment, container, false);
         return view;
     }
 
@@ -44,7 +44,7 @@ public class MyIdeasFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(view, R.string.my_ideas);
+        updateTitle(view, R.string.top_ideas);
 
         Calendar cal = Calendar.getInstance();
         Integer day = cal.get(Calendar.DATE);
@@ -87,7 +87,7 @@ public class MyIdeasFragment extends BaseFragment {
             @Override
             public void run() {
                 try {
-                    Ideas ideas = IdeasApi.getIdeas(RestClient.BASE_MY_IDEAS);
+                    Ideas ideas = IdeasApi.getIdeas(RestClient.BASE_TOP_IDEAS);
                     items = ideas.getItems();
 
                     updateUi(items);

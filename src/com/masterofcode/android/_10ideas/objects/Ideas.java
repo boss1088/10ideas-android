@@ -27,9 +27,7 @@ public class Ideas {
 
         for (int i = 0; i < json.length(); i++) {
             JSONObject obj = (JSONObject) json.get(i);
-            /*if(obj.optJSONObject("seminar").optInt("status")==3){*/
             collection.addSeminar(new Idea(obj));
-            /*}*/
         }
         collection.setTotal(collection.getItems().size());
         return collection;

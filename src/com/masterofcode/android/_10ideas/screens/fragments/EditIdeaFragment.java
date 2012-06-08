@@ -14,33 +14,59 @@ import com.masterofcode.android.R;
 import com.masterofcode.android._10ideas.BaseFragment;
 import com.masterofcode.android._10ideas.Intents;
 import com.masterofcode.android._10ideas.helpers.IdeasApi;
+import com.masterofcode.android._10ideas.screens.activities.DashboardActivity;
 
 import java.io.UnsupportedEncodingException;
 
 public class EditIdeaFragment extends BaseFragment {
 
+    private DashboardActivity activity;
+    private View view;
+    private boolean restore;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+
+        activity = (DashboardActivity) getActivity();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.edit_idea_fragment, container, false);
+        view = inflater.inflate(R.layout.edit_idea_fragment, container, false);
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(getView(), R.string.edit_idea);
+        updateTitle(view, R.string.edit_idea);
 
-        Button save = (Button) getView().findViewById(R.id.save);
-        Button cancel = (Button) getView().findViewById(R.id.cancel);
+        Button save = (Button) view.findViewById(R.id.save);
+        Button cancel = (Button) view.findViewById(R.id.cancel);
 
         save.setOnClickListener(listener);
         cancel.setOnClickListener(listener);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        restore = true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        restore = false;
+    }
+
     private void save() {
-        EditText txtTitle = (EditText) getView().findViewById(R.id.text);
+        EditText txtTitle = (EditText) view.findViewById(R.id.text);
         final String username = txtTitle.getText().toString().trim();
-        final CheckBox checkBox = (CheckBox) getView().findViewById(R.id.public_chk);
+        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.public_chk);
 
         showProgressDialog();
         new Thread(new Runnable() {
@@ -60,7 +86,7 @@ public class EditIdeaFragment extends BaseFragment {
     }
 
     private void goBack() {
-        getActivity().runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             public void run() {
                 getActivity().sendBroadcast(Intents.getIdeaCreatedBroadcastIntent());
                 Toast.makeText(getActivity(), getString(R.string.idea_saved), Toast.LENGTH_SHORT);

@@ -78,7 +78,7 @@ public class IdeasApi {
             reqEntity.addPart("idea[public]", new StringBody("0"));
         }
 
-        RestClient.post(RestClient.BASE_URL + RestClient.BASE_IDEAS, reqEntity);
+        RestClient.post(RestClient.BASE_URL + RestClient.BASE_MY_IDEAS, reqEntity);
 
         //TODO rebuild if need some return
     }
@@ -103,7 +103,7 @@ public class IdeasApi {
     public static Idea getIdeaById(String id) throws NullPointerException {
         JSONObject json = null;
         try {
-            json = RestClient.getObject(RestClient.BASE_URL + RestClient.BASE_IDEA + "/" + id + ".json"
+            json = RestClient.getObject(RestClient.BASE_URL + RestClient.BASE_IDEAS_PATH + id + ".json"
                     + "?auth_token=" + PreferenceHelper.getAuthToken());
         } catch (NullPointerException e) {
             throw e;
@@ -116,14 +116,14 @@ public class IdeasApi {
         MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         reqEntity.addPart("auth_token", new StringBody(PreferenceHelper.getAuthToken()));
 
-        return RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEA + "/" + id + "/vote.json", reqEntity);
+        return RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEAS_PATH + id + "/vote.json", reqEntity);
     }
 
     public static String publish(String id) throws UnsupportedEncodingException {
         MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         reqEntity.addPart("auth_token", new StringBody(PreferenceHelper.getAuthToken()));
 
-        return RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEA + "/" + id + "/publish.json", reqEntity);
+        return RestClient.sendPut(RestClient.BASE_URL + RestClient.BASE_IDEAS_PATH + id + "/publish.json", reqEntity);
     }
 
     private static String checkForError(JSONObject json) {

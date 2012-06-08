@@ -35,9 +35,10 @@ public class RestClient {
     final static public String BASE_URL = "http://stage.masterofcode.com:10101/";
     final static public String BASE_USERS = "users.json";
     final static public String BASE_USERS_SIGN_IN = "users/sign_in.json";
-    final static public String BASE_IDEAS = "ideas.json";
-    final static public String BASE_IDEA = "ideas";
+    final static public String BASE_MY_IDEAS = "ideas.json";
+    final static public String BASE_IDEAS_PATH = "ideas/";
     final static public String BASE_PUBLIC_IDEAS = "ideas/public.json";
+    final static public String BASE_TOP_IDEAS = "ideas/winners.json";
 
     private static String convertStreamToString(InputStream is) {
         /*
