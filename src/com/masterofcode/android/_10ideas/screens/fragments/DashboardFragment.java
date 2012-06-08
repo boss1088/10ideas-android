@@ -78,7 +78,7 @@ public class DashboardFragment extends BaseFragment {
                     count = ideas.getTotal();
                 } catch (UnsupportedEncodingException e) {
                     showErrorDialog();
-                } catch (NullPointerException npx) {
+                } catch (NullPointerException npe) {
                     showErrorDialog("Network connection problem");
                 } finally {
                     hideProgressIndicator();
@@ -180,13 +180,11 @@ public class DashboardFragment extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            System.out.println("DashboardFragment$BroadcastListener.onReceive Instance: " + Instance);
             if (Instance == null) {
                 return;
             }
 
             if (Intents.isIdeaCreatedBroadcastIntent(intent)) {
-                System.out.println("DashboardFragment$BroadcastListener.onReceive isIdeaCreatedBroadcastIntent");
                 Instance.loadData();
             }
         }

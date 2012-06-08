@@ -25,6 +25,11 @@
 
     </LinearLayout>
 
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/title_separator"/>
+
     <Button
             android:id="@+id/idea_button"
             android:layout_height="wrap_content"
@@ -32,6 +37,7 @@
             android:layout_margin="20dip"
             android:paddingLeft="20dip"
             android:paddingRight="20dip"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right"
+            style="@style/DefaultButton"/>
 
 </LinearLayout>

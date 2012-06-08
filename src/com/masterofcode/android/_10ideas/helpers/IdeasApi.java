@@ -100,9 +100,14 @@ public class IdeasApi {
         return ideas;
     }
 
-    public static Idea getIdeaById(String id) {
-        JSONObject json = RestClient.getObject(RestClient.BASE_URL + RestClient.BASE_IDEA + "/" + id + ".json"
-                + "?auth_token=" + PreferenceHelper.getAuthToken());
+    public static Idea getIdeaById(String id) throws NullPointerException {
+        JSONObject json = null;
+        try {
+            json = RestClient.getObject(RestClient.BASE_URL + RestClient.BASE_IDEA + "/" + id + ".json"
+                    + "?auth_token=" + PreferenceHelper.getAuthToken());
+        } catch (NullPointerException e) {
+            throw e;
+        }
 
         return new Idea(json);
     }

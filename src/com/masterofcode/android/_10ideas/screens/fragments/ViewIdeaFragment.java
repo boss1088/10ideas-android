@@ -61,9 +61,14 @@ public class ViewIdeaFragment extends BaseFragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Idea idea = IdeasApi.getIdeaById(id);
-                updateUi(idea);
-                dissmissProgressDialog();
+                try {
+                    Idea idea = IdeasApi.getIdeaById(id);
+                    updateUi(idea);
+                } catch (NullPointerException e) {
+                    showErrorDialog("Network connection problem");
+                } finally {
+                    dissmissProgressDialog();
+                }
             }
         }).start();
     }

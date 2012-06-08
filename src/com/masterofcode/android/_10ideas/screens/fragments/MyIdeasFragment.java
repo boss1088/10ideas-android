@@ -60,6 +60,14 @@ public class MyIdeasFragment extends BaseFragment {
         TextView monthYear = (TextView) view.findViewById(R.id.month_year);
         monthYear.setText(String.format(getString(R.string.month_year), month, year));
 
+        ImageButton refresh = (ImageButton) view.findViewById(R.id.refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadData();
+            }
+        });
+
         if (restore && items != null) {
             updateUi(items);
             restore = false;
@@ -86,6 +94,8 @@ public class MyIdeasFragment extends BaseFragment {
                     updateUi(items);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
+                } catch (NullPointerException npe) {
+                    showErrorDialog("Network connection problem");
                 } finally {
                     dissmissProgressDialog();
                 }
@@ -138,14 +148,6 @@ public class MyIdeasFragment extends BaseFragment {
                 Idea idea = (Idea) adapterView.getItemAtPosition(position);
                 ViewIdeaFragment fragment = ViewIdeaFragment.newInstance(idea.getId());
                 ((DashboardActivity) getActivity()).replaceFragment(fragment);
-            }
-        });
-
-        ImageButton refresh = (ImageButton) view.findViewById(R.id.refresh);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadData();
             }
         });
     }

@@ -73,6 +73,7 @@
             </RelativeLayout>
 
             <View
+                    android:id="@+id/separator"
                     android:layout_width="fill_parent"
                     android:layout_height="1px"
                     android:layout_below="@+id/created_ideas"
@@ -83,7 +84,7 @@
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_below="@+id/created_ideas"
+                    android:layout_below="@id/separator"
                     android:layout_margin="10dip">
 
                 <LinearLayout
