@@ -170,7 +170,11 @@ public class DashboardFragment extends BaseFragment {
                     }
                     break;
                 case R.id.home_btn_top:
-                    showComingSoonDialog();
+                    if (haveInternet()) {
+                        ((DashboardActivity) getActivity()).replaceFragment(new TopIdeasFragment());
+                    } else {
+                        showNoInternetDialog();
+                    }
                     break;
             }
         }

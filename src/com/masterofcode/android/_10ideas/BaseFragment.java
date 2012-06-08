@@ -11,6 +11,7 @@ import com.masterofcode.android._10ideas.helpers.Util;
 public class BaseFragment extends Fragment {
 
     private ProgressDialog progressDialog = null;
+    private boolean showProgressDialog;
 
     protected void updateTitle(View view, int strId) {
         TextView title = (TextView) view.findViewById(R.id.title);
@@ -92,7 +93,24 @@ public class BaseFragment extends Fragment {
                     progressDialog.dismiss();
                 }
             });
+            showProgressDialog = false;
+        }
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+            showProgressDialog = true;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (progressDialog != null && showProgressDialog) {
+            progressDialog.show();
         }
     }
 }

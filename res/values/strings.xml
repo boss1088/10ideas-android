@@ -30,4 +30,7 @@
     <string name="idea_saved">Your idea has been saved</string>
     <string name="month_year">%1$s\n%2$s</string>
     <string name="count">%1$s/10</string>
+    <string name="top_ideas">Top Ideas</string>
+    <string name="cant_vote_your_ideas">You can\'t vote for your ideas!</string>
+    <string name="votes_s">Votes: %1$s</string>
 </resources>

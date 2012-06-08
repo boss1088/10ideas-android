@@ -38,6 +38,7 @@ public class RestClient {
     final static public String BASE_IDEAS = "ideas.json";
     final static public String BASE_IDEA = "ideas";
     final static public String BASE_PUBLIC_IDEAS = "ideas/public.json";
+    final static public String BASE_TOP_IDEAS = "ideas/winners.json";
 
     private static String convertStreamToString(InputStream is) {
         /*

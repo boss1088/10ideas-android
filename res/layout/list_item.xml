@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TextView
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/text1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:minHeight="?android:attr/listPreferredItemHeight"
-        android:textColor="#333"/>
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/text1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="#333"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+    <TextView
+            android:id="@+id/votes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            android:textColor="#333"
+            android:textStyle="italic"
+            android:text="@string/votes_s"/>
+
+</LinearLayout>

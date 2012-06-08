@@ -126,8 +126,12 @@ public class PublicIdeasFragment extends BaseFragment {
                 }
 
                 Idea item = (Idea) getItem(position);
+
                 TextView text = (TextView) view.findViewById(R.id.text1);
+                TextView votes = (TextView) view.findViewById(R.id.votes);
+
                 text.setText(item.getEssential());
+                votes.setText(String.format(getString(R.string.votes_s), item.getVotes().toString()));
                 return view;
             }
         };

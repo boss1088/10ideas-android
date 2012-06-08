@@ -15,6 +15,8 @@ import com.masterofcode.android._10ideas.objects.Idea;
 import com.masterofcode.android._10ideas.screens.activities.DashboardActivity;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class ViewIdeaFragment extends BaseFragment {
 
@@ -22,6 +24,7 @@ public class ViewIdeaFragment extends BaseFragment {
 
     private String id;
     private DashboardActivity activity;
+    private View view;
 
     public static ViewIdeaFragment newInstance(String id) {
         ViewIdeaFragment f = new ViewIdeaFragment();
@@ -45,14 +48,15 @@ public class ViewIdeaFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.view_idea_fragment, container, false);
+        view = inflater.inflate(R.layout.view_idea_fragment, container, false);
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(getView(), R.string.view_idea);
+        updateTitle(view, R.string.view_idea);
         loadData();
     }
 
@@ -77,10 +81,22 @@ public class ViewIdeaFragment extends BaseFragment {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView text = (TextView) getView().findViewById(R.id.text);
+                TextView text = (TextView) view.findViewById(R.id.text);
                 text.setText(idea.getEssential());
 
-                Button button = (Button) getView().findViewById(R.id.idea_button);
+                SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+                SimpleDateFormat outFormat = new SimpleDateFormat("dd MMMM yyyy");
+                String noteCreated = "";
+                try {
+                    noteCreated = outFormat.format(inFormat.parse(idea.getCreated_at()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                TextView created = (TextView) view.findViewById(R.id.created);
+                created.setText(noteCreated);
+
+                Button button = (Button) view.findViewById(R.id.idea_button);
                 String userId = idea.getUser_id();
                 if (userId.equals(PreferenceHelper.getUserId()) && !idea.isPublic()) {
                     button.setText("Publish");
@@ -117,7 +133,7 @@ public class ViewIdeaFragment extends BaseFragment {
                                 }
                             });
                         } else {
-                            showErrorDialog();
+                            showErrorDialog(activity.getString(R.string.cant_vote_your_ideas));
                         }
                     } catch (UnsupportedEncodingException e) {
                         showErrorDialog();
