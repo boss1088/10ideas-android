@@ -43,7 +43,18 @@
                 android:layout_gravity="center_vertical"
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:textStyle="bold"
-                android:textColor="#333"/>
+                android:textColor="@color/text_color"/>
+
+        <TextView
+                android:id="@+id/published"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:textColor="@color/text_color"
+                android:textStyle="bold"
+                android:text="@string/published"
+                android:visibility="gone"/>
 
         <Button
                 android:id="@+id/idea_button"

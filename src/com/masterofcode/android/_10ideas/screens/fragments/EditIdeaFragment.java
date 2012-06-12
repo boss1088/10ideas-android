@@ -85,11 +85,19 @@ public class EditIdeaFragment extends BaseFragment {
         }).start();
     }
 
+    private void hideSoftKeyboard() {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (activity.getCurrentFocus() != null) {
+            imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        }
+    }
+
     private void goBack() {
         activity.runOnUiThread(new Runnable() {
             public void run() {
                 getActivity().sendBroadcast(Intents.getIdeaCreatedBroadcastIntent());
                 Toast.makeText(getActivity(), getString(R.string.idea_saved), Toast.LENGTH_SHORT);
+                hideSoftKeyboard();
                 getActivity().onBackPressed();
             }
         });
@@ -103,6 +111,7 @@ public class EditIdeaFragment extends BaseFragment {
                     save();
                     break;
                 case R.id.cancel:
+                    hideSoftKeyboard();
                     getActivity().onBackPressed();
                     break;
             }

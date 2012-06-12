@@ -97,12 +97,19 @@ public class ViewIdeaFragment extends BaseFragment {
                 created.setText(noteCreated);
 
                 Button button = (Button) view.findViewById(R.id.idea_button);
+                TextView published = (TextView) view.findViewById(R.id.published);
+
                 String userId = idea.getUser_id();
-                if (userId.equals(PreferenceHelper.getUserId()) && !idea.isPublic()) {
-                    button.setText("Publish");
-                    button.setOnClickListener(publish);
+                if (userId.equals(PreferenceHelper.getUserId())) {
+                    if (!idea.isPublic()) {
+                        button.setText(activity.getString(R.string.publish));
+                        button.setOnClickListener(publish);
+                    } else {
+                        button.setVisibility(View.GONE);
+                        published.setVisibility(View.VISIBLE);
+                    }
                 } else {
-                    button.setText("Vote");
+                    button.setText(activity.getString(R.string.vote));
                     button.setOnClickListener(vote);
                 }
             }
@@ -132,8 +139,6 @@ public class ViewIdeaFragment extends BaseFragment {
                                     Toast.makeText(getActivity(), "success", Toast.LENGTH_LONG).show();
                                 }
                             });
-                        } else {
-                            showErrorDialog(activity.getString(R.string.cant_vote_your_ideas));
                         }
                     } catch (UnsupportedEncodingException e) {
                         showErrorDialog();
