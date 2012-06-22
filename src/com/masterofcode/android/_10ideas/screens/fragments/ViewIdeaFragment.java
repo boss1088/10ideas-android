@@ -56,7 +56,7 @@ public class ViewIdeaFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(view, R.string.view_idea);
+        updateTitle(view, R.string.view_idea, false);
         loadData();
     }
 

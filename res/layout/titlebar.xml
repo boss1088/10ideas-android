@@ -8,29 +8,35 @@
 
     <LinearLayout
             style="@style/TitleBar"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="fill_parent">
 
         <ImageButton
                 android:id="@+id/home"
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_menu_home"
                 android:background="@null"
-                android:gravity="left|center_vertical"
-                android:padding="4dp"/>
+                android:layout_gravity="left|center_vertical"
+                android:layout_margin="4dp"/>
 
         <TextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_toRightOf="@id/home"
-                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:text="Title"
                 android:textColor="#FFF"
                 android:textAppearance="@android:style/TextAppearance.Large"
                 android:textStyle="bold"
                 android:gravity="left|center_vertical"/>
+
+        <ImageButton
+                android:id="@+id/btn_date"
+                style="@style/TitleBarAction"
+                android:src="@drawable/ic_menu_date"
+                android:visibility="gone"/>
 
     </LinearLayout>
 

@@ -42,7 +42,7 @@ public class EditIdeaFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(view, R.string.edit_idea);
+        updateTitle(view, R.string.edit_idea, false);
 
         Button save = (Button) view.findViewById(R.id.save);
         Button cancel = (Button) view.findViewById(R.id.cancel);

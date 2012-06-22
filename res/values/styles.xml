@@ -16,6 +16,15 @@
         <item name="android:layout_height">@dimen/action_bar_default_height</item>
         <item name="android:background">@color/titlebar_bg</item>
     </style>
+
+    <style name="TitleBarAction">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:gravity">left|center_vertical</item>
+    </style>
+
     <style name="DefaultButton">
         <item name="android:background">@drawable/btn_default_holo_light</item>
         <item name="android:focusable">true</item>
@@ -25,6 +34,7 @@
         <item name="android:minHeight">48dip</item>
         <item name="android:minWidth">64dip</item>
     </style>
+
     <style name="DefaultEditText">
         <item name="android:focusable">true</item>
         <item name="android:focusableInTouchMode">true</item>

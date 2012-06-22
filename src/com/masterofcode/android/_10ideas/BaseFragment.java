@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import com.masterofcode.android.R;
 import com.masterofcode.android._10ideas.helpers.Util;
@@ -13,10 +14,15 @@ public class BaseFragment extends Fragment {
     private ProgressDialog progressDialog = null;
     private boolean showProgressDialog;
 
-    protected void updateTitle(View view, int strId) {
+    protected void updateTitle(View view, int strId, boolean showActions) {
         TextView title = (TextView) view.findViewById(R.id.title);
         if (title != null) {
             title.setText(strId);
+        }
+
+        if (showActions) {
+            ImageButton btnDate = (ImageButton) view.findViewById(R.id.btn_date);
+            btnDate.setVisibility(View.VISIBLE);
         }
     }
 

@@ -49,7 +49,7 @@ public class DashboardFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(view, R.string.home);
+        updateTitle(view, R.string.home, false);
 
         if (restore) {
             updateUi();

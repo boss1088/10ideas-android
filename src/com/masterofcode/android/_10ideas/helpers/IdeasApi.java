@@ -32,8 +32,8 @@ public class IdeasApi {
         if (json == null) {
             throw new UnsupportedEncodingException();
         } else if (!error.equals("")) {
-                PreferenceHelper.setError(error);
-                return;
+            PreferenceHelper.setError(error);
+            return;
         }
 
         PreferenceHelper.setUserEmail(userName);
@@ -53,7 +53,7 @@ public class IdeasApi {
 
         if (json == null) {
             throw new UnsupportedEncodingException();
-        }  else if (!error.equals("")) {
+        } else if (!error.equals("")) {
             PreferenceHelper.setError(error);
             return;
         }
@@ -87,10 +87,10 @@ public class IdeasApi {
 
         Ideas ideas = null;
         JSONArray jsonArray = RestClient.get(RestClient.BASE_URL + wichIdeas
-                                                + "?auth_token=" + PreferenceHelper.getAuthToken());
+                + "?auth_token=" + PreferenceHelper.getAuthToken());
 
         try {
-           ideas = Ideas.fromJson(jsonArray);
+            ideas = Ideas.fromJson(jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (NullPointerException npe) {
@@ -110,6 +110,22 @@ public class IdeasApi {
         }
 
         return new Idea(json);
+    }
+
+    public static Ideas getMyIdeasByDate(String date) throws NullPointerException{
+        Ideas ideas = null;
+        JSONArray jsonArray = RestClient.get(RestClient.BASE_URL + RestClient.BASE_IDEAS_BY_DATE + date
+                + "?auth_token=" + PreferenceHelper.getAuthToken());
+
+        try {
+            ideas = Ideas.fromJson(jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (NullPointerException npe) {
+            throw npe;
+        }
+
+        return ideas;
     }
 
     public static String vote(String id) throws UnsupportedEncodingException {

@@ -1,5 +1,6 @@
 package com.masterofcode.android._10ideas.screens.fragments;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,7 @@ public class MyIdeasFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(view, R.string.my_ideas);
+        updateTitle(view, R.string.my_ideas, true);
 
         Calendar cal = Calendar.getInstance();
         Integer day = cal.get(Calendar.DATE);
@@ -153,5 +154,39 @@ public class MyIdeasFragment extends BaseFragment {
                 ((DashboardActivity) getActivity()).replaceFragment(fragment);
             }
         });
+
+        ImageButton btnDate = (ImageButton) view.findViewById(R.id.btn_date);
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                new DatePickerDialog(getActivity(), dateSetListener, calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
+
+    DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker datePicker, final int year, final int monthOfYear, final int dayOfYear) {
+            showProgressDialog();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        // TODO make method for converting date
+                        String date = String.valueOf(year) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(dayOfYear);
+                        Ideas ideas = IdeasApi.getMyIdeasByDate(date);
+                        items = ideas.getItems();
+
+                        updateUi(items);
+                    } catch (NullPointerException npe) {
+                        showErrorDialog("No ideas were found");
+                    } finally {
+                        dissmissProgressDialog();
+                    }
+                }
+            }).start();
+        }
+    };
 }

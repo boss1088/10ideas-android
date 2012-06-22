@@ -44,7 +44,7 @@ public class TopIdeasFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        updateTitle(view, R.string.top_ideas);
+        updateTitle(view, R.string.top_ideas, true);
 
         Calendar cal = Calendar.getInstance();
         Integer day = cal.get(Calendar.DATE);
