@@ -42,6 +42,7 @@
     <orderEntry type="library" name="android-support-v4" level="project" />
     <orderEntry type="library" name="apache-mime4j-0.6" level="project" />
     <orderEntry type="library" name="httpmime-4.0.1" level="project" />
+    <orderEntry type="module" module-name="Library" />
   </component>
 </module>
 
